@@ -1,0 +1,10 @@
+{
+    "postgres": {
+        "user": "admin",
+        "password": "dev",
+        "host": "car-dealership-db",
+        "port": 5432,
+        "database": "postgres"
+
+    }
+}
