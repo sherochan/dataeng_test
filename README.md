@@ -17,7 +17,7 @@ Donts:
 - Sparse or absent documentation
 - Code which is hard to read
 
-## Section 1: Data Pipelines
+## Section 1: Data Pipelines [COMPLETED]
 The objective of this section is to design and implement a solution to process a data file on a regular interval (e.g. daily). Assume that there are 2 data files `dataset1.csv` and `dataset2.csv`, design a solution to process these files, along with the scheduling component. The expected output of the processing task is a CSV file including a header containing the field names.
 
 You can use common scheduling solutions such as `cron` or `airflow` to implement the scheduling component. You may assume that the data file will be available at 1am everyday. Please provide documentation (a markdown file will help) to explain your solution.
@@ -29,6 +29,18 @@ Processing tasks:
 - Create a new field named `above_100`, which is `true` if the price is strictly greater than 100
 
 *Note: please submit the processed dataset too.*
+
+### Approach taken:
+- create a new docker container for running the cron job daily at 1am 
+- create Dockerfile to install cron and vim 
+- documentation 
+  - Under notebook, there is a ipynb notebook that details the code used for running the data processing at **data_processing_Q1.py**
+  - to run, follow the method for Q4 to view.
+  - 1. run `docker-compose up --build python-notebook`
+  - 2. open up browser and enter http://localhost:8890/
+  - 3. when prompted for password, enter 'user'
+  - 4. View/Run the notebook called "Q1 - data pipeline exploration and documentation"
+- for the scheduler to start, run `docker-compose up --build cron-service`
 
 ## Section 2: Databases [COMPLETED]
 You are appointed by a car dealership to create their database infrastructure. There is only one store. In each business day, cars are being sold by a team of salespersons. Each transaction would contain information on the date and time of transaction, customer transacted with, and the car that was sold. 
