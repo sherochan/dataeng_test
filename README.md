@@ -30,7 +30,7 @@ Processing tasks:
 
 *Note: please submit the processed dataset too.*
 
-## Section 2: Databases
+## Section 2: Databases [COMPLETED]
 You are appointed by a car dealership to create their database infrastructure. There is only one store. In each business day, cars are being sold by a team of salespersons. Each transaction would contain information on the date and time of transaction, customer transacted with, and the car that was sold. 
 
 The following are known:
@@ -56,6 +56,16 @@ Your team also needs you to query some information from the database that you ha
 1) I want to know the list of our customers and their spending.
 
 2) I want to find out the top 3 car manufacturers that customers bought by sales (quantity) and the sales number for it in the current month.
+
+### Approach taken:
+- created the ERD 
+- created the Dockerfile and docker-compose.yml for the postgres image ans to set up flask backend
+- created sample database populating at http://localhost:5000/v1/db_populate
+- created endpoint for a single transaction at http://localhost:5000/v1/make_transaction
+- created the endpoints to query for the two question
+  - sql queries can be found under **services/pghelper.py** for functions _pg_get_customer_spending_ and _pg_get_top_3_manufacturers_ respectively for part 1 and 2
+  - endpoint for part 1 at http://localhost:5000/v1/get_Q2_1
+  - endpoint for part 2 at http://localhost:5000/v1/get_Q2_2
 
 ## Section 3: System Design
 You are designing data infrastructure on the cloud for a company whose main business is in processing images. 
