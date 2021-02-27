@@ -4,11 +4,13 @@ from services.pghelper import (
     pg_get_row_by_col,
     pg_insert,
     pg_get_col,
-    pg_get_customer_spending
+    pg_get_customer_spending,
+    pg_get_top_3_manufacturers
 )
 from utils.utils import (
     populate_db_temp,
-    get_timestamp_str
+    get_timestamp_str,
+    get_datetime_now
 )
 
 import uuid, logging
@@ -37,6 +39,34 @@ def get_Q2_1():
             if result_dict["total_spending"] is not None:
                 result_total_spending = str(result_dict["total_spending"])
             result_dict["total_spending"] = result_total_spending
+            message_json["results"].append(result_dict)
+        message_json["status"] = "complete"
+    else:
+        message_json["error"] = err
+    
+    return jsonify(message_json)
+
+@app.route('/v1/get_Q2_2',  methods = ["GET"])
+def get_Q2_2():
+    """
+    for qns 2 part 2
+    """
+    message_json = {
+        "status": "incomplete",
+        "results": []
+    }
+    # get current month 
+    current_datetime = get_datetime_now()
+    current_month = current_datetime.month
+    results, err = pg_get_top_3_manufacturers(current_month)
+    columns_lst = ["manufacturer_id", "manufacturer_name", "total_sales","sales_quantity"]
+    if err is None:
+        for result in results:
+            result_dict = dict(zip(columns_lst, result))
+            result_total_sales = "0"
+            if result_dict["total_sales"] is not None:
+                result_total_sales = str(result_dict["total_sales"])
+            result_dict["total_sales"] = result_total_sales
             message_json["results"].append(result_dict)
         message_json["status"] = "complete"
     else:
