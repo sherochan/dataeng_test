@@ -145,7 +145,12 @@ def populate_db_temp():
     for customer_dict in customer:
         pg_insert("customers", customer_dict)
     
-
+def get_datetime_now():
+    """
+    get current datetimne 
+    """
+    return datetime.now()
+    
 def get_timestamp_str():
     """
     Get current time in string 
@@ -154,3 +159,9 @@ def get_timestamp_str():
     timestamp_str = now.strftime(TIME_FORMAT)
     return timestamp_str
 
+def get_datetime(timestamp_str):
+    """
+    given timestamp in string, convert it back to datetime given format
+    """
+    datetime_object = datetime.strptime(timestamp_str,TIME_FORMAT)
+    return datetime_object
