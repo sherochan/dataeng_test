@@ -67,7 +67,7 @@ Your team also needs you to query some information from the database that you ha
 2) I want to find out the top 3 car manufacturers that customers bought by sales (quantity) and the sales number for it in the current month.
 
 ### Approach taken:
-- created the ERD 
+- created the ERD ( *link below* )
 - created the Dockerfile and docker-compose.yml for the postgres image ans to set up flask backend
 - created sample database populating at http://localhost:5000/v1/db_populate
 - created endpoint for a single transaction at http://localhost:5000/v1/make_transaction
@@ -76,12 +76,15 @@ Your team also needs you to query some information from the database that you ha
   - endpoint for part 1 at http://localhost:5000/v1/get_Q2_1
   - endpoint for part 2 at http://localhost:5000/v1/get_Q2_2
 
-## Section 3: System Design
+## Section 3: System Design [COMPLETED]
 You are designing data infrastructure on the cloud for a company whose main business is in processing images. 
 
 The company has a web application which collects images uploaded by customers. The company also has a separate web application which provides a stream of images using a Kafka stream. The company’s software engineers have already some code written to process the images. The company  would like to save processed images for a minimum of 7 days for archival purposes. Ideally, the company would also want to be able to have some Business Intelligence (BI) on key statistics including number and type of images processed, and by which customers.
 
-Produce a system architecture diagram (e.g. Visio, Powerpoint) using any of the commercial cloud providers' ecosystem to explain your design. Please also indicate clearly if you have made any assumptions at any point.
+Produce a system architecture diagram (e.g. Visio, Powerpoint) using any of the commercial cloud providers' ecosystem to explain your design. Please also indicate clearly if you have made any assumptions at any point. 
+
+Approach taken:
+- *link below*
 
 ## Section 4: Charts and APIs [COMPLETED]
 Your team decided to design a dashboard to display the statistic of COVID19 cases. You are tasked to display one of the components of the dashboard which is to display a visualisation representation of number of COVID19 cases in Singapore over time. 
@@ -115,3 +118,7 @@ Class Value = Good
 - how to view:
   - same as Q4
   - View/Run the notebook called "Q5 - Machine Learning"
+
+
+## * Diagram for Q2 and Q3 can be found at: 
+https://drive.google.com/file/d/1u7JopOGc_3KkCnN3YEyDTdGdgJgBOAFK/view?usp=sharing
