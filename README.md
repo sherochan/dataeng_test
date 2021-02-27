@@ -35,11 +35,8 @@ Processing tasks:
 - create Dockerfile to install cron and vim 
 - documentation 
   - Under notebook, there is a ipynb notebook that details the code used for running the data processing at **data_processing_Q1.py**
-  - to run, follow the method for Q4 to view.
-  - 1. run `docker-compose up --build python-notebook`
-  - 2. open up browser and enter http://localhost:8890/
-  - 3. when prompted for password, enter 'user'
-  - 4. View/Run the notebook called "Q1 - data pipeline exploration and documentation"
+  - Follow Q4 to view.
+    - View/Run the notebook called "Q1 - data pipeline exploration and documentation"
 - for the scheduler to start, run `docker-compose up --build cron-service`
 
 ## Section 2: Databases [COMPLETED]
