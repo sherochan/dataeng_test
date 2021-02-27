@@ -1,5 +1,5 @@
 import pandas as pd
-import os, sys
+import os, sys, logging
 
 FINAL_FOLDER = "/data/completed/"
 
@@ -53,7 +53,6 @@ def data_preprocess(fp):
     """
     # read in the file 
     print("fp = {} of type = {}".format(fp, type(fp)))
-    print(os.path.isfile(fp))
     if os.path.isfile(fp):
         
         dataset = pd.read_csv(fp)
@@ -75,13 +74,16 @@ def data_preprocess(fp):
         return "file does not exist!"
     
 if __name__ == "__main__":
+    print("run python script!!")
     datafilepath = sys.argv[1]
     filename = os.path.split(datafilepath)[-1]
     final_path = os.path.join(FINAL_FOLDER, filename)
+    print("final_path = {}".format(final_path))
     if not os.path.exists(FINAL_FOLDER):
         # create folder
         os.makedirs(FINAL_FOLDER) 
 
     final_processed_output = data_preprocess(datafilepath)
     if type(final_processed_output) != str:
+        print("save to csv!")
         final_processed_output.to_csv(final_path)
