@@ -84,6 +84,11 @@ Display a graph to show the number cases in Singapore over time using the APIs f
 ### Approach taken:
 - create jupyter notebook
 - use requests to get info from the api endpoint and pandas to plot the graph after converting the date column
+- how to view: 
+  - 1. run `docker-compose up --build python-notebook`
+  - 2. open up browser and enter http://localhost:8890/
+  - 3. when prompted for password, enter 'user'
+  - 4. View/Run the notebook called "Q4 Charts and Api"
 
 ## Section 5: Machine Learning
 Using the dataset from https://archive.ics.uci.edu/ml/datasets/Car+Evaluation, create a machine learning model to predict the buying price given the following parameters:
