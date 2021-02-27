@@ -315,14 +315,6 @@ def pg_get_customer_spending():
     err = None
     try:
         connection, cursor = create_db_connection()
-        # sql_query = """
-        # SELECT id as transaction_id, customer_id
-        # FROM transactions 
-        # WHERE transactions.customer_id in (
-        #     SELECT id as customer_id
-        #     FROM customers
-        # )
-        # """
         sql_query = """
             SELECT customers.id, customers.first_name, customers.last_name, transaction_customer_info.total_spending
             FROM customers
@@ -349,7 +341,7 @@ def pg_get_customer_spending():
         cursor.execute(sql_query)
         results = cursor.fetchall()
     except Exception as e:
-        error_message = "error in deleting row = {}".format(e)
+        error_message = "error in getting rows = {}".format(e)
         err = error_message
         
     finally:
@@ -357,4 +349,53 @@ def pg_get_customer_spending():
             close_db_connection(connection, cursor)
         return results, err
 
+##### Q2.2
+def pg_get_top_3_manufacturers(current_month):
+    """
+    to address Qns 2 part 2 - I want to find out the top 3 car manufacturers that customers bought by sales (quantity) and the sales number for it in the current month.
+
+    Params:
+    -------
+    current_month : int
+    """
+    err = None
+    try:
+        connection, cursor = create_db_connection()
+        sql_query = """
+            SELECT manufacturers.id, manufacturers.name, SUM(car_transaction_info.transaction_spending) as total_sales, COUNT(car_transaction_info.transaction_id) as sales_quantity
+            FROM manufacturers
+            RIGHT JOIN
+            (
+                SELECT cars.id, cars.manufacturer_id, cars.price, transaction_details_info.transaction_id, transaction_details_info.quantity, transaction_details_info.transaction_month, cars.price * transaction_details_info.quantity as transaction_spending
+                FROM cars
+                RIGHT JOIN
+                (
+                    SELECT transaction_details.car_id, transaction_details.transaction_id, transaction_details.quantity, EXTRACT(MONTH FROM transactions_info.transaction_date) AS transaction_month
+                    FROM transaction_details
+                    LEFT JOIN
+                    (
+                        SELECT transactions.transaction_date, transactions.id as transaction_id
+                        FROM transactions
+                    ) as transactions_info
+                    ON (transactions_info.transaction_id = transaction_details.transaction_id)
+                ) AS transaction_details_info
+                ON (cars.id = transaction_details_info.car_id)
+                WHERE transaction_details_info.transaction_month = {}
+            ) as car_transaction_info
+            ON (manufacturers.id = car_transaction_info.manufacturer_id)
+            GROUP BY manufacturers.id
+            ORDER BY sales_quantity DESC
+            LIMIT 3
+            ;
+        """.format(float(current_month))
+        cursor.execute(sql_query)
+        results = cursor.fetchall()
+    except Exception as e:
+        error_message = "error in getting rows = {}".format(e)
+        err = error_message
+        
+    finally:
+        if (connection):
+            close_db_connection(connection, cursor)
+        return results, err
     
