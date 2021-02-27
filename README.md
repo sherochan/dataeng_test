@@ -90,7 +90,7 @@ Display a graph to show the number cases in Singapore over time using the APIs f
   - 3. when prompted for password, enter 'user'
   - 4. View/Run the notebook called "Q4 Charts and Api"
 
-## Section 5: Machine Learning
+## Section 5: Machine Learning [COMPLETED]
 Using the dataset from https://archive.ics.uci.edu/ml/datasets/Car+Evaluation, create a machine learning model to predict the buying price given the following parameters:
 
 Maintenance = High
@@ -98,3 +98,11 @@ Number of doors = 4
 Lug Boot Size = Big
 Safety = High
 Class Value = Good
+
+### Approach taken:
+- create notebook
+- download data and put into datafolder
+- using sklearn for modelling and then using the model to predict on the given parameters
+- how to view:
+  - same as Q4
+  - View/Run the notebook called "Q5 - Machine Learning"
