@@ -14,6 +14,13 @@ services:
       - ./data:/data
     ports:
       - "8890:8888"
+  
+  cron-service:
+    image: cron-service
+    build:
+      context: ./data
+    volumes:
+      - ./data:/data
 
   car-dealership:
     build: .
