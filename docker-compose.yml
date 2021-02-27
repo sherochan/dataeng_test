@@ -1,5 +1,19 @@
 version: '2'
 services:
+  python-notebook:
+    image: python-notebook
+    build:
+      context: ./notebook
+    command:
+      - /bin/sh
+      - -c
+      - |
+        jupyter notebook --NotebookApp.token='user' --ip=0.0.0.0 --allow-root
+    volumes:
+      - ./notebook:/app
+    ports:
+      - "8890:8888"
+
   car-dealership:
     build: .
     environment:
