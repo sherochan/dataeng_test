@@ -111,9 +111,8 @@ def pg_insert(table_name, status):
     
     Returns:
     --------
-    None
+    None or error_message
     """
-    print("status = {}".format(status))
     err = None
     try:
         connection, cursor = create_db_connection()
@@ -122,17 +121,15 @@ def pg_insert(table_name, status):
 
         columns_str = ", ".join(columns_lst)
         values_str = ", ".join(["%s "] * len(columns_lst))
-        print("values _str = {}".format(values_str))
         sql_query = """
             INSERT INTO {}({})
             VALUES({});
         """.format(table_name, columns_str, values_str)
-        print("sql query!! = {}".format(sql_query))
         cursor.execute(sql_query, values_tup)
         connection.commit()
     except Exception as e:
         error_message = "error in inserting a single row ={}".format(e)
-        logging.info(error_message)
+        print(error_message)
         err = error_message
     else:
         if (connection):
@@ -155,7 +152,6 @@ def pg_update_id(table_name, _id, status):
     --------
     None or error message
     """
-    print("status = {}".format(status))
     err= None
     try:
         connection, cursor = create_db_connection()
@@ -175,7 +171,7 @@ def pg_update_id(table_name, _id, status):
         connection.commit()
     except Exception as e:
         error_message = "error in updating db = {}".format(e)
-        logging.info(error_message)
+        print(error_message)
         err = error_message
     finally:
         if (connection):
@@ -236,11 +232,8 @@ def pg_get_row_by_col(table_name, col_name, col_value):
             SELECT * FROM {}
             WHERE ({})= %s ;
         """.format(table_name, col_name)
-        print("sql_query retrieve condition = {}".format(sql_query))
-        logging.info("sql_query retrieve condition log = {}".format(sql_query))
         cursor.execute(sql_query, values_tup)
         res = cursor.fetchone()
-        print("res = {}".format(res))
     except Exception as e:
         print("error in retrieving a row by col conditions = {}".format(e))
         raise
@@ -289,8 +282,9 @@ def pg_delete_id(table_name, _id):
 
     Returns:
     --------
-    None
+    None or error_message
     """
+    err = None
     try:
         connection, cursor = create_db_connection()
         sql_query = """
@@ -300,17 +294,20 @@ def pg_delete_id(table_name, _id):
         cursor.execute(sql_query)
         connection.commit()
     except Exception as e:
-        print("error in deleting row = {}".format(e))
-        raise
+        error_message = "error in deleting row = {}".format(e)
+        print(error_message)
+        err = error_message
     finally:
         if (connection):
             close_db_connection(connection, cursor)
+        return err
 
 
 ##### Q2.1
 def pg_get_customer_spending():
     """
     to address Qns 2 part 1 - I want to know the list of our customers and their spending.
+
     """
     err = None
     try:
