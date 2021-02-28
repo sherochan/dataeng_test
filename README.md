@@ -37,6 +37,7 @@ Processing tasks:
   - Under notebook, there is a ipynb notebook that details the code used for running the data processing at **data_processing_Q1.py**
   - Follow Q4 to view.
     - View/Run the notebook called "Q1 - data pipeline exploration and documentation"
+  - processed datasets can be found under Folder *data/completed/*
 - for the scheduler to start, run `docker-compose up --build cron-service`
 
 ## Section 2: Databases [COMPLETED]
